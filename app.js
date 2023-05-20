@@ -1,14 +1,15 @@
-const express = require('express');
-const app = express();
+const express = require('express');  // express npm
+const app = express();  
 const port = 3000;
-const path = require('path');
+const path = require('path');  // path core
+const ejs = require('ejs');  // ejs npm
 
 // import express from 'express';
 // const app = express();
 // const port = 3000;
 // import path from 'path';
 
-// Eğer yukarıdaki yeni yöntem ile yapar require yerine import kullanırsak pacage.json dosyasına "type" : "module", olarak ekleme yapmamız gerekmektedir. 
+// Eğer yukarıdaki yeni yöntem ile yapar require yerine import kullanırsak pacage.json dosyasına "type" : "module", olarak ekleme yapmamız gerekmektedir.
 // Ayrıca aşağıdaki __Ddirname yerine direk dosya yolunu secmemiz gerekmektedir.
 
 app.listen(port, () => {
@@ -28,8 +29,6 @@ app.listen(port, () => {
 // app.use(appLogger);
 // app.use(appLogger2);
 
-app.use(express.static('public'));
-
 // const photo = {
 //   id: 1,
 //   name: 'Photo Name',
@@ -40,7 +39,23 @@ app.use(express.static('public'));
 //   res.send(photo);
 // });
 
+// TEMPLATE ENGINE
+app.set("view engine", "ejs");
+
+// MIDDLEWARES
+app.use(express.static('public'));
+
+// ROUTES
 app.get('/', (req, res) => {
   // res.sendFile(path.resolve("./temp/index.html"));
-  res.sendFile(path.resolve(__dirname, "temp/index.html"));
+  // res.sendFile(path.resolve(__dirname, 'temp/index.html'));
+  res.render("index")
+});
+
+app.get('/about', (req, res) => {
+  res.render("about")
+});
+
+app.get('/add', (req, res) => {
+  res.render("add")
 });
