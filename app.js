@@ -9,13 +9,17 @@ const methodOverride = require('method-override');
 
 /* const Photo = require('./models/Photo'); */
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000; // 3000 veya kullanılacak servis sağlayıcının belirlediği "PORT" da çalışabilir.
 
 const photoControllers = require('./controllers/photoControllers');
 const pageControllers = require('./controllers/pageControllers');
 
 // Connect DB
-mongoose.connect('mongodb://localhost/pcat-test-db');
+// mongoose.connect('mongodb://localhost/pcat-test-db');
+mongoose.connect('mongodb+srv://sinanbayar:cjuCUNm0TKAEBB2h@cluster0.getkuse.mongodb.net/pcat-db?retryWrites=true&w=majority')
+.then(() => console.log("MongoDB Connected!"))
+.catch((err) => console.log(err))
+// localhost'daki mongoDB yerine buluttaki mongoDB'ye kullanıcı adı ve şifre ile bağladık.
 
 // import express from 'express';
 // const app = express();
