@@ -67,11 +67,11 @@ app.use(
 ); // Browserda Put request desteklenmediği için Post requesti manipüle ederek Put request gibi kullanmamızı sağlıyor.
 
 // ROUTES
-app.get('/', photoControllers.getAllPhotos);
-app.get('/photos/:id', photoControllers.getPhoto);
-app.post('/photos', photoControllers.createPhoto);
-app.put('/photos/:id', photoControllers.updatePhoto);
-app.delete('/photos/:id', photoControllers.deletePhoto);
+app.get('/', photoControllers.getAllPhotos); // Anasayfada bütün fotoğrafları gösteriyoruz.
+app.get('/photos/:id', photoControllers.getPhoto); // Id'sine göre istenen fotoğrafın olduğu sayfayı açıyoruz.
+app.post('/photos', photoControllers.createPhoto); // Belirlediğimiz title, description özelliklerine sahip fotoğrafı siteye yüklüyoruz.
+app.put('/photos/:id', photoControllers.updatePhoto); // Id'sine göre belirlenen fotoğrafın title ve description özelliklerini güncelliyoruz.
+app.delete('/photos/:id', photoControllers.deletePhoto); // Id'sine göre belirlenen fotoğrafı siliyoruz.
 
 app.get('/about', pageControllers.getAboutPage);
 app.get('/add', pageControllers.getAddPage);

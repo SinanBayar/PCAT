@@ -4,8 +4,22 @@ const fs = require('fs');
 exports.getAllPhotos = async (req, res) => {
   // res.sendFile(path.resolve("./temp/index.html"));
   // res.sendFile(path.resolve(__dirname, 'temp/index.html'));
-  const photos = await Photo.find({}).sort('-dateCreated');
-  res.render('index', { photos });
+  // console.log(req.query);
+
+  const page = req.query.page;
+  // console.log(page)
+  const photosPerPage = 3;
+  const totalPhotos = await Photo.find().countDocuments();
+  // console.log(totalPhotos);
+  const photos = await Photo.find({})
+  .sort('-dateCreated')
+  .skip((page - 1) * photosPerPage)
+  .limit(photosPerPage);
+  res.render('index', { 
+    photos: photos, // Fotoğraflar bilgisi
+    current: page, // O anki sayfa
+    pages: Math.ceil(totalPhotos / photosPerPage) // Toplam sayfa sayısı
+   });
 };
 
 exports.getPhoto = async (req, res) => {
